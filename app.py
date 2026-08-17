@@ -70,3 +70,169 @@ class DeepfakeCNN(nn.Module):
         x = self.fc2(x)
 
         return x
+
+# Image Transformation
+
+valid_test_transform = transforms.Compose([
+    transforms.Resize((128, 128)),
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=[0.485, 0.456, 0.406],
+        std=[0.229, 0.224, 0.225]
+    )
+])
+
+# Load Trained Model
+
+device = torch.device("cpu")
+
+model = DeepfakeCNN()
+
+model.load_state_dict(
+    torch.load(
+        "best_deepfake_cnn.pth",
+        map_location=device
+    )
+)
+
+model = model.to(device)
+model.eval()
+
+print("Model loaded successfully")
+
+
+# Streamlit Interface
+
+st.set_page_config(
+    page_title="FrameCheck | Image Authenticity",
+    page_icon="🔎",
+    layout="wide"
+)
+
+st.markdown("""
+<style>
+
+    .stApp {
+        background-color: #0b0f14;
+        color: #e8edf2;
+    }
+
+    .main-title {
+        font-size: 42px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 0px;
+    }
+
+    .subtitle {
+        color: #8f9aa6;
+        font-size: 17px;
+        margin-top: 4px;
+        margin-bottom: 35px;
+    }
+
+    .section-label {
+        color: #7f8b97;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .info-card {
+        background-color: #11171e;
+        border: 1px solid #26303a;
+        border-radius: 12px;
+        padding: 22px;
+        margin-bottom: 18px;
+    }
+
+    .status-title {
+        color: #8f9aa6;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .status-text {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .model-info {
+        color: #8f9aa6;
+        font-size: 13px;
+        padding-top: 15px;
+        border-top: 1px solid #26303a;
+    }
+
+    div[data-testid="stFileUploader"] {
+        background-color: #11171e;
+        border: 1px dashed #3a4652;
+        border-radius: 12px;
+        padding: 12px;
+    }
+
+</style>
+""", unsafe_allow_html=True)
+
+
+st.markdown(
+    '<div class="main-title">FRAMECHECK</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '<div class="subtitle">Image Authenticity Analysis</div>',
+    unsafe_allow_html=True
+)
+
+
+left_column, right_column = st.columns([1.15, 0.85], gap="large")
+
+
+with left_column:
+
+    st.markdown(
+        '<div class="section-label">Image Input</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="info-card">',
+        unsafe_allow_html=True
+    )
+
+    uploaded_file = st.file_uploader(
+        "Drop an image here or browse",
+        type=["jpg", "jpeg", "png"],
+        label_visibility="visible"
+    )
+
+    st.markdown(
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+
+with right_column:
+
+    st.markdown(
+        '<div class="section-label">Analysis</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        """
+        <div class="info-card">
+            <div class="status-title">MODEL STATUS</div>
+            <div class="status-text">Ready for analysis</div>
+            <br>
+            <div class="model-info">
+                CNN • Binary Classification<br>
+                Input Resolution • 128 × 128
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
