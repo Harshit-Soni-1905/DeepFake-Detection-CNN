@@ -1,0 +1,4 @@
+streamlit==1.61.1
+torch
+torchvision
+pillow
