@@ -314,10 +314,6 @@ Different sources can introduce variations in:
 - Manipulation techniques
 - Generation pipelines
 
-Therefore, the current model is best viewed as a **deepfake detection prototype** evaluated primarily within the distribution represented by its dataset.
-
-This also provides a clear direction for future improvement rather than hiding the model's limitations.
-
 ---
 ## 🔮 Future Improvements
 
