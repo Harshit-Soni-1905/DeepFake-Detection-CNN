@@ -298,18 +298,27 @@ http://localhost:8501
 
 ---
 
-## ⚠️ Limitations
+## ⚠️ Generalization & Limitations
 
-Although the model achieved **90.85% accuracy on the held-out test set**, additional testing with random internet images showed weaker generalization.
+The model achieves **90.85% accuracy on the held-out test set**.
 
-This highlights an important limitation of the current system: **domain shift**.
+During additional experimentation with externally sourced internet images, the model showed weaker generalization than on images from the original dataset.
 
-Images from external sources can differ from the training data in terms of compression, image characteristics, facial appearance and manipulation techniques.
+This highlights an important real-world challenge in deepfake detection: **distribution shift**.
 
-Therefore, FRAMECHECK should be considered a **deepfake detection prototype**, rather than a production-grade forensic detection system.
+Different sources can introduce variations in:
+
+- Image compression
+- Resolution
+- Facial characteristics
+- Manipulation techniques
+- Generation pipelines
+
+Therefore, the current model is best viewed as a **deepfake detection prototype** evaluated primarily within the distribution represented by its dataset.
+
+This also provides a clear direction for future improvement rather than hiding the model's limitations.
 
 ---
-
 ## 🔮 Future Improvements
 
 - Train on more diverse deepfake datasets
