@@ -215,24 +215,53 @@ with left_column:
     )
 
 
-with right_column:
 
-    st.markdown(
-        '<div class="section-label">Analysis</div>',
-        unsafe_allow_html=True
+
+if uploaded_file is not None:
+
+    image = Image.open(uploaded_file).convert("RGB")
+
+    st.image(
+        image,
+        caption="Uploaded image",
+        width=500
     )
 
-    st.markdown(
-        """
-        <div class="info-card">
-            <div class="status-title">MODEL STATUS</div>
-            <div class="status-text">Ready for analysis</div>
-            <br>
-            <div class="model-info">
-                CNN • Binary Classification<br>
-                Input Resolution • 128 × 128
+    image_tensor = valid_test_transform(image)
+
+    image_tensor = image_tensor.unsqueeze(0)
+
+    image_tensor = image_tensor.to(device)
+
+    with torch.no_grad():
+        outputs = model(image_tensor)
+        probabilities = torch.softmax(outputs, dim=1)
+
+    predicted_class = probabilities.argmax(dim=1).item()
+    confidence = probabilities.max().item()
+
+    class_names = ["Fake", "Real"]
+    prediction = class_names[predicted_class]
+
+    with right_column:
+
+        st.markdown(
+            '<div class="section-label">Analysis</div>',
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            f"""
+            <div class="info-card">
+                <div class="status-title">CLASSIFICATION</div>
+                <div class="status-text">{prediction.upper()}</div>
+                <br>
+                <div class="model-info">
+                    Confidence • {confidence * 100:.2f}%<br>
+                    Model • CNN<br>
+                    Input Resolution • 128 × 128
+                </div>
             </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+            """,
+            unsafe_allow_html=True
+        )
