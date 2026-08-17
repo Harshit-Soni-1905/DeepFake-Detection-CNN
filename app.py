@@ -356,22 +356,19 @@ if uploaded_file is not None:
             unsafe_allow_html=True
         )
 
-        st.markdown(
-            f"""
-            <div class="info-card">
-                <div class="status-title">Classification</div>
-                <div class="status-text {status_class}">{prediction.upper()}</div>
-
-                <div class="confidence-bar-bg">
-                    <div class="confidence-bar-fill" style="width:{confidence_pct:.1f}%; background:{bar_color};"></div>
-                </div>
-
-                <div class="model-info">
-                    <b>Confidence</b> &nbsp;·&nbsp; {confidence_pct:.2f}%<br>
-                    <b>Model</b> &nbsp;·&nbsp; Custom CNN (3 Conv blocks)<br>
-                    <b>Input Resolution</b> &nbsp;·&nbsp; 128 × 128
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
+        card_html = (
+            '<div class="info-card">'
+            '<div class="status-title">Classification</div>'
+            f'<div class="status-text {status_class}">{prediction.upper()}</div>'
+            '<div class="confidence-bar-bg">'
+            f'<div class="confidence-bar-fill" style="width:{confidence_pct:.1f}%; background:{bar_color};"></div>'
+            '</div>'
+            '<div class="model-info">'
+            f'<b>Confidence</b> &nbsp;&middot;&nbsp; {confidence_pct:.2f}%<br>'
+            '<b>Model</b> &nbsp;&middot;&nbsp; Custom CNN (3 Conv blocks)<br>'
+            '<b>Input Resolution</b> &nbsp;&middot;&nbsp; 128 &times; 128'
+            '</div>'
+            '</div>'
         )
+
+        st.markdown(card_html, unsafe_allow_html=True)
