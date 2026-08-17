@@ -3,9 +3,31 @@
 ### CNN-based DeepFake Image Detection with PyTorch and Streamlit
 
 <p align="center">
+  A deep learning based image classification system for detecting manipulated facial images.
+</p>
+
+<p align="center">
   <a href="https://framecheck-deepfake.streamlit.app/">
     🚀 <b>Live Demo</b>
   </a>
+</p>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+
+<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+
+<img src="https://img.shields.io/badge/TorchVision-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="TorchVision">
+
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+
+<img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+
 </p>
 
 ---
@@ -32,7 +54,7 @@ Fake / Real
 
 ## 🎯 Objective
 
-The objective of this project is to build a lightweight CNN-based system capable of learning visual patterns from facial images and classifying them into two categories:
+The objective of this project is to build a CNN-based system capable of learning visual patterns from facial images and classifying them into two categories:
 
 ```text
 0 → Fake
