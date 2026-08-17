@@ -1,9 +1,9 @@
-# 🔎 FRAMECHECK
+# 🔎 FRAMECHECK | DeepFake Detection CNN
 
-### DeepFake Detection using a Custom CNN
+### CNN-based DeepFake Image Detection with PyTorch and Streamlit
 
 <p align="center">
-  <b>Detect whether a facial image is Real or Fake using a PyTorch-based deep learning model.</b>
+  A deep learning based image classification system for detecting manipulated facial images.
 </p>
 
 <p align="center">
@@ -14,144 +14,86 @@
 
 <p align="center">
 
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
 
-<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
+<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
 
-<img src="https://img.shields.io/badge/TorchVision-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
+<img src="https://img.shields.io/badge/TorchVision-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="TorchVision">
 
-<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white">
+<img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
 
-<img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white">
+<img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
 
-<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+
+<img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
 
 </p>
 
 ---
 
-## 🚀 Results at a Glance
+## 📌 Overview
 
-| Metric | Result |
+**FRAMECHECK** is a deep learning based image classification project that detects whether a facial image is **Real** or **Fake** using a custom Convolutional Neural Network (CNN).
+
+The project covers the complete workflow from image preprocessing and CNN training to model evaluation, single-image inference and deployment through Streamlit.
+
+```text
+Image
+  ↓
+Preprocessing
+  ↓
+CNN
+  ↓
+Softmax
+  ↓
+Fake / Real
+```
+
+---
+
+## 🎯 Objective
+
+The objective of this project is to build a CNN-based system capable of learning visual patterns from facial images and classifying them into two categories:
+
+```text
+0 → Fake
+1 → Real
+```
+
+---
+
+## 🗂️ Dataset
+
+The dataset is divided into training, validation and test sets:
+
+| Split | Images |
 |---|---:|
-| **Test Accuracy** | **90.85%** |
-| **Precision** | **90.87%** |
-| **Recall** | **90.82%** |
-| **F1 Score** | **90.85%** |
-| **Training Images** | **100,000** |
-| **Validation Images** | **20,000** |
-| **Test Images** | **20,000** |
+| Training | 100,000 |
+| Validation | 20,000 |
+| Testing | 20,000 |
 
-> **[Try FRAMECHECK Live →](https://framecheck-deepfake.streamlit.app/)**
+The model was trained using the training set, the validation set was used for model selection, and the test set was kept for final evaluation.
 
 ---
 
-## 📌 About
+## ⚙️ Preprocessing
 
-**FRAMECHECK** is an end-to-end deep learning project for **image-based deepfake detection**.
+Images are resized to **128 × 128** and normalized before being passed to the CNN.
 
-A custom Convolutional Neural Network was trained using **140,000 images** across training, validation and test sets. The model learns visual patterns from facial images and performs binary classification:
+### Training
 
-```text
-Input Image
-     ↓
-Image Preprocessing
-     ↓
-Custom CNN
-     ↓
-Class Probabilities
-     ↓
-┌─────────────┐
-│ Fake / Real │
-└─────────────┘
-```
+- Resize to 128 × 128
+- Random Horizontal Flip
+- Random Rotation up to 10°
+- Convert to Tensor
+- Normalize
 
-The trained model was then integrated into a Streamlit application and deployed as a publicly accessible web app.
+### Validation / Testing
 
----
-
-## 🧠 Model Architecture
-
-The model is a custom CNN built using PyTorch rather than relying on a pretrained architecture.
-
-```text
-Input: 3 × 128 × 128
-          │
-          ▼
-     Conv2D 3 → 32
-          │
-        ReLU
-          │
-       MaxPool
-          │
-          ▼
-     Conv2D 32 → 64
-          │
-        ReLU
-          │
-       MaxPool
-          │
-          ▼
-     Conv2D 64 → 128
-          │
-        ReLU
-          │
-       MaxPool
-          │
-          ▼
-        Flatten
-          │
-          ▼
-     FC 32768 → 128
-          │
-        ReLU
-          │
-      Dropout 0.5
-          │
-          ▼
-      FC 128 → 2
-          │
-          ▼
-      Fake / Real
-```
-
-### Key Design Choices
-
-- **3 convolution blocks** for hierarchical feature extraction
-- **ReLU** for non-linear feature learning
-- **MaxPooling** for spatial downsampling
-- **Dropout (0.5)** to reduce overfitting
-- **Fully connected layers** for final classification
-
----
-
-## 🖼️ Data Processing
-
-Images are resized to **128 × 128** before being passed to the model.
-
-### Training Transformations
-
-```text
-Resize
-  ↓
-Random Horizontal Flip
-  ↓
-Random Rotation (10°)
-  ↓
-ToTensor
-  ↓
-Normalize
-```
-
-### Validation / Test Transformations
-
-```text
-Resize
-  ↓
-ToTensor
-  ↓
-Normalize
-```
+- Resize to 128 × 128
+- Convert to Tensor
+- Normalize
 
 Normalization:
 
@@ -160,43 +102,86 @@ mean = [0.485, 0.456, 0.406]
 std  = [0.229, 0.224, 0.225]
 ```
 
-Using separate training and evaluation transformations ensures that augmentation is applied only during training while validation and test evaluation remain deterministic.
+---
+
+## 🧠 CNN Architecture
+
+FRAMECHECK uses a custom CNN implemented using PyTorch.
+
+```text
+Input: 3 × 128 × 128
+        │
+        ▼
+Conv2D: 3 → 32
+        │
+      ReLU
+        │
+    MaxPool
+        │
+        ▼
+Conv2D: 32 → 64
+        │
+      ReLU
+        │
+    MaxPool
+        │
+        ▼
+Conv2D: 64 → 128
+        │
+      ReLU
+        │
+    MaxPool
+        │
+        ▼
+Flatten
+        │
+        ▼
+FC: 32768 → 128
+        │
+      ReLU
+        │
+   Dropout 0.5
+        │
+        ▼
+FC: 128 → 2
+        │
+        ▼
+   Fake / Real
+```
+
+The convolutional layers learn visual features from the images, while the fully connected layers perform the final classification.
 
 ---
 
-## 🏋️ Training
+## 📈 Training
 
 The model was trained for **10 epochs**.
 
-The best validation performance was obtained at Epoch 10:
+The best validation performance was achieved during Epoch 10:
 
 ```text
-Training Accuracy   : 89.44%
-Validation Accuracy : 91.21%
+Validation Accuracy: 91.21%
+Training Accuracy:    89.44%
 ```
 
-The best-performing checkpoint was saved as:
+The best-performing model was saved as:
 
 ```text
 best_deepfake_cnn.pth
 ```
 
-The checkpoint is used directly by the deployed application, so the model does not need to be retrained during inference.
-
 ---
 
-## 📊 Evaluation
+## 📊 Results
 
-The final checkpoint was evaluated on **20,000 unseen test images**.
-
-### Performance
+The final model was evaluated on **20,000 unseen test images**.
 
 | Metric | Score |
 |---|---:|
-| Accuracy | **90.85%** |
-| Precision | **90.87%** |
-| Recall | **90.82%** |
-| F1 Score | **90.85%** |
+| **Test Accuracy** | **90.85%** |
+| **Precision** | **90.87%** |
+| **Recall** | **90.82%** |
+| **F1 Score** | **90.85%** |
 
 ### Confusion Matrix
 
@@ -207,82 +192,65 @@ Actual Fake   9082        918
 Actual Real    912       9088
 ```
 
-The relatively balanced false-positive and false-negative counts indicate that the model performs consistently across both classes on the held-out test set.
+The relatively balanced number of false predictions indicates that the model performs similarly across both classes on the held-out test set.
 
 ---
 
 ## 🔍 Inference Pipeline
 
-When an image is uploaded to FRAMECHECK:
+For a new uploaded image, FRAMECHECK performs:
 
 ```text
-             Uploaded Image
-                    │
-                    ▼
-              RGB Conversion
-                    │
-                    ▼
-              Resize 128×128
-                    │
-                    ▼
-              Tensor Conversion
-                    │
-                    ▼
-                Normalize
-                    │
-                    ▼
-                 CNN Model
-                    │
-                    ▼
-                  Logits
-                    │
-                    ▼
-                 Softmax
-                    │
-                    ▼
-             Class Probabilities
-                    │
-                    ▼
-             Fake / Real + Confidence
+Upload Image
+     ↓
+RGB Conversion
+     ↓
+Resize 128 × 128
+     ↓
+Tensor Conversion
+     ↓
+Normalization
+     ↓
+CNN
+     ↓
+Softmax Probabilities
+     ↓
+Fake / Real Prediction
 ```
 
-The inference pipeline uses the same preprocessing strategy as validation and testing.
+The application also displays the confidence associated with the predicted class.
 
 ---
 
-## 🌐 Web Application
+## 🌐 Streamlit Application
 
-The trained model is exposed through a custom Streamlit interface.
+The trained model is integrated into a custom Streamlit interface that allows users to:
 
-### Application Features
+- Upload JPG, JPEG or PNG images
+- Preview the uploaded image
+- Run CNN inference
+- View Fake / Real classification
+- View prediction confidence
+- View model and input information
 
-- 📤 Image upload
-- 🖼️ Image preview
-- 🧠 CNN-based prediction
-- 📊 Confidence score
-- ⚡ CPU-based inference
-- 🎨 Custom interface
-- ☁️ Public cloud deployment
+### 🚀 Live Demo
 
-### Live Demo
-
-**[🔎 Open FRAMECHECK](https://framecheck-deepfake.streamlit.app/)**
+**[FRAMECHECK](https://framecheck-deepfake.streamlit.app/)**
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|---|---|
-| **Python** | Development |
-| **PyTorch** | CNN architecture and inference |
-| **TorchVision** | Image transformations |
-| **Pillow** | Image processing |
-| **Scikit-learn** | Evaluation metrics |
-| **Matplotlib / Seaborn** | Visualization |
-| **Streamlit** | Web interface |
-| **Git / GitHub** | Version control |
-| **Streamlit Cloud** | Deployment |
+- **Python**
+- **PyTorch**
+- **TorchVision**
+- **Pillow**
+- **Scikit-learn**
+- **Matplotlib**
+- **Seaborn**
+- **Streamlit**
+- **Git & GitHub**
+- **Streamlit Community Cloud**
 
 ---
 
@@ -303,26 +271,26 @@ DeepFake-Detection-CNN/
 
 ## 💻 Run Locally
 
-### Clone
+Clone the repository:
 
 ```bash
 git clone <YOUR_GITHUB_REPOSITORY_URL>
 cd DeepFake-Detection-CNN
 ```
 
-### Install dependencies
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run
+Run the application:
 
 ```bash
 python -m streamlit run app.py
 ```
 
-Open:
+The application will be available at:
 
 ```text
 http://localhost:8501
@@ -330,43 +298,52 @@ http://localhost:8501
 
 ---
 
-## ⚠️ Generalization & Limitations
+## ⚠️ Limitations
 
-The model achieves **90.85% accuracy on the held-out test set**.
+Although the model achieved **90.85% accuracy on the held-out test set**, additional testing with random internet images showed weaker generalization.
 
-During additional experimentation with externally sourced internet images, the model showed weaker generalization than on images from the original dataset.
+This highlights an important limitation of the current system: **domain shift**.
 
-This highlights an important real-world challenge in deepfake detection: **distribution shift**.
+Images from external sources can differ from the training data in terms of compression, image characteristics, facial appearance and manipulation techniques.
 
-Different sources can introduce variations in:
-
-- Image compression
-- Resolution
-- Facial characteristics
-- Manipulation techniques
-- Generation pipelines
-
-Therefore, the current model is best viewed as a **deepfake detection prototype** evaluated primarily within the distribution represented by its dataset.
-
-This also provides a clear direction for future improvement rather than hiding the model's limitations.
+Therefore, FRAMECHECK should be considered a **deepfake detection prototype**, rather than a production-grade forensic detection system.
 
 ---
 
 ## 🔮 Future Improvements
 
-- Train on multiple and more diverse deepfake datasets
-- Improve cross-dataset generalization
-- Experiment with ResNet, EfficientNet and Xception
-- Add dedicated face detection and cropping
-- Integrate Grad-CAM for explainability
-- Perform external dataset evaluation
-- Extend from image detection to video-level detection
+- Train on more diverse deepfake datasets
+- Improve generalization to unseen manipulation techniques
+- Experiment with pretrained models such as ResNet, EfficientNet and Xception
+- Add face detection and cropping
+- Implement Grad-CAM for model explainability
+- Perform cross-dataset evaluation
+- Extend the system to video deepfake detection
+
+---
+
+## 🎓 Key Learnings
+
+This project provided hands-on experience with:
+
+- CNN architecture design
+- PyTorch model training
+- Image preprocessing and augmentation
+- Model checkpointing
+- Confusion matrix analysis
+- Precision, Recall and F1 Score
+- Single-image inference
+- Streamlit application development
+- GitHub and cloud deployment
+- Understanding model generalization and domain shift
 
 ---
 
 ## 📜 License
 
 This project is licensed under the **MIT License**.
+
+See the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -376,11 +353,10 @@ This project is licensed under the **MIT License**.
 
 B.Tech Computer Science & Engineering
 
-**Interests:** AI/ML • Deep Learning • Computer Vision
+Interested in Artificial Intelligence, Machine Learning and Deep Learning.
 
 ---
 
 <p align="center">
-  <b>FRAMECHECK</b><br>
   Built with Python • PyTorch • Streamlit
 </p>
