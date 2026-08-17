@@ -1,77 +1,50 @@
-# 🔎 FRAMECHECK | DeepFake Detection CNN
+# 🔎 FRAMECHECK
 
-### Image Authenticity Analysis using Convolutional Neural Networks
-
-FRAMECHECK is a deep learning based image classification system designed to classify facial images as **Real** or **Fake** using a custom Convolutional Neural Network (CNN).
-
-The project covers the complete machine learning workflow, from image preprocessing and CNN training to model evaluation and deployment as an interactive Streamlit web application.
+### DeepFake Detection using Convolutional Neural Networks
 
 <p align="center">
+  <strong>A PyTorch-based image classification system for detecting manipulated facial images</strong>
+</p>
 
-<a href="https://framecheck-deepfake.streamlit.app/">
-  <img src="https://img.shields.io/badge/🚀%20Live%20Demo-FRAMECHECK-FF4B4B?style=for-the-badge" alt="Live Demo">
-</a>
-
+<p align="center">
+  <a href="https://framecheck-deepfake.streamlit.app/">
+    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-FRAMECHECK-FF4B4B?style=for-the-badge" alt="Live Demo">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-Deep%20Learning-orange?style=for-the-badge&logo=pytorch" alt="PyTorch">
+  <img src="https://img.shields.io/badge/Streamlit-Deployed-red?style=for-the-badge&logo=streamlit" alt="Streamlit">
 </p>
 
 ---
 
-## 📌 Overview
+## 📌 About the Project
 
-The increasing availability of AI-based face manipulation techniques has made it increasingly difficult to distinguish authentic images from manipulated ones.
+**FRAMECHECK** is a deep learning project that classifies facial images into two categories:
 
-FRAMECHECK explores a practical deep learning approach to this problem by training a CNN to learn visual patterns that differentiate between real and fake facial images.
+- **Fake**: Manipulated or synthetic facial image
+- **Real**: Authentic facial image
 
-The trained model is evaluated on a held-out test set and then integrated into a Streamlit application for real-time image classification.
+The project was developed using a custom **Convolutional Neural Network (CNN)** with PyTorch and deployed as an interactive web application using Streamlit.
 
----
-
-## ✨ Features
-
-- 🧠 Custom CNN architecture built with PyTorch
-- 🖼️ Image classification into **Fake** or **Real**
-- 🔄 Consistent preprocessing during training and inference
-- 📊 Evaluation using:
-  - Accuracy
-  - Precision
-  - Recall
-  - F1 Score
-  - Confusion Matrix
-- ⚡ CPU-based inference for deployment
-- 🌐 Interactive Streamlit web application
-- ☁️ Deployed using Streamlit Community Cloud
-
----
-
-## 🏗️ System Architecture
+Rather than treating deepfake detection as only a model-training problem, this project implements an end-to-end machine learning workflow:
 
 ```text
-                    INPUT IMAGE
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │ Image Preprocessing │
-              │ Resize → 128 × 128  │
-              │ Normalize           │
-              └──────────┬──────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │      CNN Model      │
-              │                     │
-              │ Conv2D → ReLU       │
-              │ MaxPool             │
-              │ Conv2D → ReLU       │
-              │ MaxPool             │
-              │ Conv2D → ReLU       │
-              │ MaxPool             │
-              └──────────┬──────────┘
-                         │
-                         ▼
-                  Fully Connected
-                         │
-                         ▼
-                   Output Layer
-                  ┌──────┴──────┐
-                  │             │
-                FAKE           REAL
+Dataset
+   ↓
+Image Preprocessing
+   ↓
+Data Augmentation
+   ↓
+CNN Training
+   ↓
+Validation
+   ↓
+Best Model Checkpoint
+   ↓
+Test Evaluation
+   ↓
+Inference Pipeline
+   ↓
+Streamlit Application
+   ↓
+Cloud Deployment
