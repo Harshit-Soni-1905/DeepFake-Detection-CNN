@@ -300,7 +300,7 @@ http://localhost:8501
 
 ## ⚠️ Generalization & Limitations
 
-The model achieves **90.85% accuracy on the held-out test set**.
+The model achieves **91.97% accuracy on the held-out test set**.
 
 During additional experimentation with externally sourced internet images, the model showed weaker generalization than on images from the original dataset.
 
