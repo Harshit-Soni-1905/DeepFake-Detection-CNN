@@ -274,7 +274,7 @@ DeepFake-Detection-CNN/
 Clone the repository:
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone https://github.com/Harshit-Soni-1905/DeepFake-Detection-CNN.git
 cd DeepFake-Detection-CNN
 ```
 
