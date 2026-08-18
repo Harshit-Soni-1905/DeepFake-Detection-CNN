@@ -160,8 +160,8 @@ The model was trained for **10 epochs**.
 The best validation performance was achieved during Epoch 10:
 
 ```text
-Validation Accuracy: 91.21%
-Training Accuracy:    89.44%
+Validation Accuracy: 91.97%
+Training Accuracy:   90.18%
 ```
 
 The best-performing model was saved as:
