@@ -254,20 +254,6 @@ The trained model is integrated into a custom Streamlit interface that allows us
 
 ---
 
-## 📁 Project Structure
-
-```text
-DeepFake-Detection-CNN/
-│
-├── app.py
-├── best_deepfake_cnn.pth
-├── requirements.txt
-├── README.md
-├── LICENSE
-└── .gitignore
-```
-
----
 
 ## 💻 Run Locally
 
